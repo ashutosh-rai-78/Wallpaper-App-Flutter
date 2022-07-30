@@ -1,5 +1,5 @@
 class CategoriesModel {
-  String categoriesName = "";
-  String categoriesUrl = "";
+  String categoryName = "";
+  String imageUrl = "";
 
 }
