@@ -8,34 +8,34 @@ List<CategoriesModel> getCategories() {
 //
   categoriesModel.categoryName = "Abstract";
   categoriesModel.imageUrl =
-      "https://www.pexels.com/photo/blue-and-pink-artwork-2471234/";
+      "https://images.pexels.com/photos/2471234/pexels-photo-2471234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   categories.add(categoriesModel);
   categoriesModel = new CategoriesModel();
   //
   categoriesModel.categoryName = "Nature";
   categoriesModel.imageUrl =
-      "https://www.pexels.com/photo/beautiful-view-of-moraine-lake-2662116/";
+      "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   categories.add(categoriesModel);
-  categoriesModel = new CategoriesModel(); 
-  
+  categoriesModel = new CategoriesModel();
+
   //
   categoriesModel.categoryName = "Cars";
   categoriesModel.imageUrl =
-      "https://www.pexels.com/photo/black-dodge-challenger-coupe-3311574/";
+      "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   categories.add(categoriesModel);
-  categoriesModel = new CategoriesModel(); 
-  
+  categoriesModel = new CategoriesModel();
+
   //
   categoriesModel.categoryName = "Bike";
   categoriesModel.imageUrl =
-      "https://www.pexels.com/photo/close-up-photography-of-parked-motorcycle-1413412/";
+      "https://images.pexels.com/photos/1413412/pexels-photo-1413412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   categories.add(categoriesModel);
-  categoriesModel = new CategoriesModel(); 
-  
+  categoriesModel = new CategoriesModel();
+
   //
   categoriesModel.categoryName = "Art";
   categoriesModel.imageUrl =
-      "https://www.pexels.com/photo/blue-and-pink-artwork-2471234/";
+      "https://images.pexels.com/photos/2471234/pexels-photo-2471234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   categories.add(categoriesModel);
   categoriesModel = new CategoriesModel();
 
