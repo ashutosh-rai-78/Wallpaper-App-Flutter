@@ -11,10 +11,10 @@ class WallpaperModel {
   });
   factory WallpaperModel.fromMap(Map<String, dynamic> jsonData) {
     return WallpaperModel(
-      photographer: jsonData['src'],
-      photographerUrl: jsonData['src'],
-      photographerId: jsonData['src'],
-      src: jsonData['src'],
+      photographer: jsonData['photographer'],
+      photographerUrl: jsonData['photographer_url'],
+      photographerId: jsonData['photographer_id'],
+      src: SrcModel.fromMap(jsonData['src']),
     );
   }
 }
@@ -28,4 +28,11 @@ class SrcModel {
     this.small,
     this.portrait,
   });
+  factory SrcModel.fromMap(Map<String, dynamic> jsonData) {
+    return SrcModel(
+      origial: jsonData['original'],
+      small: jsonData['small'],
+      portrait: jsonData['portrait'],
+    );
+  }
 }

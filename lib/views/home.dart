@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     jsonData["photos"].forEach((element) {
       print(element);
       WallpaperModel wallpaperModel = new WallpaperModel();
-      wallpaperModel = WallpaperModel.fromJson(element);
+      wallpaperModel = jsonData["photos"][0];
       // categories.add(CategoriesModel.fromJson(element));
     });
   }
