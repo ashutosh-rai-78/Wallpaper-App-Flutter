@@ -1,4 +1,10 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ImageView extends StatefulWidget {
   final String imageUrl;
@@ -9,6 +15,16 @@ class ImageView extends StatefulWidget {
 }
 
 class _ImageViewState extends State<ImageView> {
+  var filePath;
+
+  /* _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  } */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +49,9 @@ class _ImageViewState extends State<ImageView> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    _save();
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width / 2,
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -76,5 +94,26 @@ class _ImageViewState extends State<ImageView> {
         ],
       ),
     );
+  }
+
+  _save() async {
+    await _askPermission();
+    var response = await Dio().get(widget.imageUrl,
+        options: Options(responseType: ResponseType.bytes));
+    final result =
+        await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
+    print(result);
+    Navigator.pop(context);
+  }
+
+  _askPermission() async {
+    if (Platform.isIOS) {
+      /*Map<PermissionGroup, PermissionStatus> permissions =
+          */
+      await PermissionHandler().requestPermissions([PermissionGroup.photos]);
+    } else {
+      /* PermissionStatus permission = */ await PermissionHandler()
+          .checkPermissionStatus(PermissionGroup.storage);
+    }
   }
 }

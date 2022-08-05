@@ -1,13 +1,9 @@
 import 'dart:convert';
-
-import 'package:flutter/widgets.dart';
-
 import 'package:flutter/material.dart';
 import 'package:wallpaper_app/data/data.dart';
 import 'package:wallpaper_app/model/categories_model.dart';
 import 'package:wallpaper_app/model/wallpaper_model.dart';
 import 'package:wallpaper_app/views/categories.dart';
-import 'package:wallpaper_app/views/image_view.dart';
 import 'package:wallpaper_app/views/search.dart';
 import 'package:wallpaper_app/widget/widget.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +19,6 @@ class _HomePageState extends State<HomePage> {
   List<CategoriesModel> categories = [];
   List<WallpaperModel> wallpapers = [];
   TextEditingController searchController = TextEditingController();
-
   getTrendingWallpapers() async {
     var response = await http.get(
         Uri.parse("https://api.pexels.com/v1/curated?page=2&per_page=40"),
