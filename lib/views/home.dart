@@ -97,6 +97,10 @@ class _HomePageState extends State<HomePage> {
                 primary: false,
               ),
             ),
+            SizedBox(
+              height: 16,
+            ),
+            wallpaperList(wallpapers, context)
           ],
         ),
       ),
