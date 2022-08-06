@@ -3,8 +3,10 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:wallpaper_manager/wallpaper_manager.dart';
 
 class ImageView extends StatefulWidget {
   final String imageUrl;
@@ -96,13 +98,23 @@ class _ImageViewState extends State<ImageView> {
     );
   }
 
+  Future<void> setWallpaper() async {
+    int location = WallpaperManager.HOME_SCREEN;
+    var file = await DefaultCacheManager().getSingleFile(widget.imageUrl);
+    String result =
+        await WallpaperManager.setWallpaperFromFile(file.path, location);
+  }
+
   _save() async {
     await _askPermission();
     var response = await Dio().get(widget.imageUrl,
         options: Options(responseType: ResponseType.bytes));
     final result =
         await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
-    print(result);
+    int location = WallpaperManager.HOME_SCREEN;
+    await WallpaperManager.setWallpaperFromFile(result, location);
+    print(result +
+        "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
     Navigator.pop(context);
   }
 
