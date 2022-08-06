@@ -73,7 +73,7 @@ class _SearchPageState extends State<SearchPage> {
                             border: InputBorder.none),
                       ),
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: (() {
                         getSearchWallpapers(searchController.text);
                       }),

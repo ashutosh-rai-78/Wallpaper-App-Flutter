@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class ImageView extends StatefulWidget {
   final String imageUrl;
@@ -49,8 +50,19 @@ class _ImageViewState extends State<ImageView> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    _save();
+                  onTap: () async {
+                    String result;
+// Platform messages may fail, so we use a try/catch PlatformException.
+                    try {
+                      result = await AsyncWallpaper.setWallpaper(
+                        url: widget.imageUrl,
+                        wallpaperLocation: AsyncWallpaper.HOME_SCREEN,
+                      )
+                          ? 'Wallpaper set'
+                          : 'Failed to get wallpaper.';
+                    } on PlatformException {
+                      result = 'Failed to get wallpaper.';
+                    }
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width / 2,
@@ -94,26 +106,5 @@ class _ImageViewState extends State<ImageView> {
         ],
       ),
     );
-  }
-
-  _save() async {
-    await _askPermission();
-    var response = await Dio().get(widget.imageUrl,
-        options: Options(responseType: ResponseType.bytes));
-    final result =
-        await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
-    print(result);
-    Navigator.pop(context);
-  }
-
-  _askPermission() async {
-    if (Platform.isIOS) {
-      /*Map<PermissionGroup, PermissionStatus> permissions =
-          */
-      await PermissionHandler().requestPermissions([PermissionGroup.photos]);
-    } else {
-      /* PermissionStatus permission = */ await PermissionHandler()
-          .checkPermissionStatus(PermissionGroup.storage);
-    }
   }
 }
